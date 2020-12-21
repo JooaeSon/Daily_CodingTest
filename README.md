@@ -1,7 +1,7 @@
 # Daily_CodingTest
 ## 파이썬 기반 코딩테스트 연습을 위한 문제풀이입니다. [SWEA, Programmers]
 
-### ✔SWEA
+### ✔ SWEA
 - List1,2
 - String
 - Stack1,2
@@ -24,7 +24,7 @@
 - 정수론 최적화</br>
 💻 https://swexpertacademy.com/main/main.do
 
-### ✔Programmers
+### ✔ Programmers
 - level 1
 - level 2
 - level 3</br>
