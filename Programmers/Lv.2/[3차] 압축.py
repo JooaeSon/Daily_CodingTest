@@ -22,6 +22,7 @@ def solution(msg):
         if k < len(msg):
             c = msg[k]
             dictionary.append(w + c)
+
         i = k
 
     return answer
