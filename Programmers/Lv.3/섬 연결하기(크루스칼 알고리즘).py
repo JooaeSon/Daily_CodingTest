@@ -27,7 +27,7 @@ def union(n1, n2):
         else:
             parent[root1] = root2  # root2가 root1의 부모가 됨
             if rank[root1] == rank[root2]:  # 각 집합의 개수가 같다면
-                rank[root2] += 1  # root2에 집합이 하나 더 생겨서 +1
+                rank[root2] += 1  # root2에 계급 깊이가 +1
 
 
 # 크루스칼 알고리즘 사용
