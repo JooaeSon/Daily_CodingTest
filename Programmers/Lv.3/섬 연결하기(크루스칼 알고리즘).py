@@ -25,9 +25,9 @@ def union(n1, n2):
         if rank[root1] > rank[root2]:  # 노드 수가 적은 집합의 루트가 노드 수가 많은 집합의 루트로 변경됨
             parent[root2] = root1
         else:
-            parent[root1] = root2
+            parent[root1] = root2  # root2가 root1의 부모가 됨
             if rank[root1] == rank[root2]:  # 각 집합의 개수가 같다면
-                rank[root2] += 1  # 둘중 아무노드 집합 하나 늘려주기
+                rank[root2] += 1  # root2는 자식이 하나 더 생겼으므로 +1
 
 
 # 크루스칼 알고리즘 사용
