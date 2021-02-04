@@ -1,5 +1,5 @@
 parent = dict()  # 부모 정보
-rank = dict()  # 자기자신을 포함한 조상의 수
+rank = dict()  # 조상의 수
 
 
 # node 초기화
@@ -27,7 +27,7 @@ def union(n1, n2):
         else:
             parent[root1] = root2  # root2가 root1의 부모가 됨
             if rank[root1] == rank[root2]:  # 각 집합의 개수가 같다면
-                rank[root2] += 1  # root2는 자식이 하나 더 생겼으므로 +1
+                rank[root2] += 1  # root2에 집합이 하나 더 생겨서 +1
 
 
 # 크루스칼 알고리즘 사용
