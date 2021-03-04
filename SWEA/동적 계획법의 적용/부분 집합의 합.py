@@ -11,7 +11,7 @@ def PartitionSum(subset, K):
         else:
             if K-last > 0:
                 return PartitionSum(subset[:-1], K-last)+PartitionSum(subset[:-1], K)
-            else:
+            else: # K<last
                 return PartitionSum(subset[:-1], K)
 
 
