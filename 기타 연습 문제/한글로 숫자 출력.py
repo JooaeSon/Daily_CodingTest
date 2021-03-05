@@ -31,4 +31,4 @@ def solution(num):
     return answer
 
 
-solution(9990099599)
+solution(1000045)
