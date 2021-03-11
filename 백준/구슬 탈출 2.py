@@ -49,7 +49,7 @@ def BFS():
                 return
             # 두 공이 같은 위치에 있는 경우
             elif nrx == nbx and nry == nby:
-                # 이동거리가 적은 구슬을 한 칸 뒤로
+                # 이동 거리가 많은 구슬을 한 칸 뒤로
                 if rmove > bmove:
                     nrx -= dx
                     nry -= dy
