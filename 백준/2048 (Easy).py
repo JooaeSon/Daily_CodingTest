@@ -1,16 +1,14 @@
 from sys import stdin
+import copy
 
 N = int(stdin.readline())
 board = [list(map(int, stdin.readline().split())) for _ in range(N)]
+answer = float('-inf')
 
-dx = [-1, 0, 1, 0]
-dy = [0, 1, 0, -1]
-
-
-def move(nx, ny):
+def move(dir):
     # 해당 방향에서 다 끝으로 몰아넣기.
 
-    if nx==-1: # 왼쪽으로 몰아 넣음
+    if dir==0: # 왼쪽으로 몰아 넣음
         for i in range(N):
             idx=0
             for j in range(1, N):
@@ -20,41 +18,76 @@ def move(nx, ny):
                     if board[i][idx]==0:
                         board[i][idx]=temp
                     elif board[i][idx]==temp:
-                        board[i][idx] *= 2
+                        board[i][idx] = temp*2
                         idx+=1
                     else:
                         idx+=1
                         board[i][idx] = temp
 
-    elif nx==1: # 오른쪽으로 몰아 넣음
+    elif dir==1: # 오른쪽으로 몰아 넣음
+        for i in range(N):
+            idx=N-1
+            for j in range(N-2, -1, -1):
+                if board[i][j]:
+                    temp=board[i][j]
+                    board[i][j]=0
+                    if board[i][idx]==0:
+                        board[i][idx]=temp
+                    elif board[i][idx]==temp:
+                        board[i][idx] =temp*2
+                        idx-=1
+                    else:
+                        idx-=1
+                        board[i][idx] = temp
 
-    elif ny==-1: # 위쪽으로 몰아 넣음
+    elif dir==2: # 위쪽으로 몰아 넣음
+        for j in range(N):
+            idx=0
+            for i in range(1, N):
+                if board[i][j]:
+                    temp=board[i][j]
+                    board[i][j]=0
+                    if board[idx][j]==0:
+                        board[idx][j]=temp
+                    elif board[idx][j]==temp:
+                        board[idx][j]=temp*2
+                        idx+=1
+                    else:
+                        idx+=1
+                        board[idx][j] = temp
 
-    elif ny == 1: # 아래 쪽으로 몰아 넣음
-
-
-    return
+    elif dir==3: # 아래 쪽으로 몰아 넣음
+        for j in range(N):
+            idx=N-1
+            for i in range(N-2, -1, -1):
+                if board[i][j]:
+                    temp=board[i][j]
+                    board[i][j] = 0
+                    if board[idx][j]==0:
+                        board[idx][j]=temp
+                    elif board[idx][j]==temp:
+                        board[idx][j]=temp*2
+                        idx-=1
+                    else:
+                        idx-=1
+                        board[idx][j] = temp
 
 
 def dfs(cnt):
+    global board, answer
+
     if cnt >= 5:
-        print(max(map(max, board)))
+        if max(map(max, board)) > answer:
+            answer = max(map(max, board))
         return
 
-    move(dx[dir], dy[dir])
-
+    tmp_board=copy.deepcopy(board) # 섞이기 전
     for i in range(4):
+        move(i)
         dfs(cnt+1)
+        board = copy.deepcopy(tmp_board)
 
+# dfs 사용 :모든 가능성을 탐색 (상, 하, 좌, 우 번갈아 가면서 최대 5회 사용)
+dfs(0)
 
-def solution():
-    # dfs 사용 :모든 가능성을 탐색 (상, 하, 좌, 우 번갈아 가면서 최대 5회 사용)
-    if N == 1:
-        print(board[0][0])
-        return
-
-    dfs(0)
-
-    return
-
-solution()
+print(answer)
