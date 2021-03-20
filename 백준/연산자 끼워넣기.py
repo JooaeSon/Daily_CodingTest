@@ -26,7 +26,6 @@ def cal(num, idx, plus, subtract, multiply, division):
 Max = float('-inf')
 Min = float('inf')
 
-
 cal(A[0], 1, a, b, c, d)
 
 print(Max)
