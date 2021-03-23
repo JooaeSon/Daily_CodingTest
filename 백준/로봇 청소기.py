@@ -5,7 +5,7 @@ N, M = map(int, sys.stdin.readline().split())
 r, c, d = map(int, sys.stdin.readline().split())
 Map = [list(map(int, sys.stdin.readline().split())) for _ in range(N)]
 
-# 북, 동, 남, 서 일때 왼쪽 방향
+# 북, 동, 남, 서
 dx = [-1, 0, 1, 0]
 dy = [0, 1, 0, -1]
 
