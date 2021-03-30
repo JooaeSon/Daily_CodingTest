@@ -75,6 +75,8 @@ def cube(side, dir):
 
 
 def turn(side, dir):
+    print(side)
+    print(*side)
     if dir == '+':
         return [list(reversed(x)) for x in zip(*side)]
     else:
