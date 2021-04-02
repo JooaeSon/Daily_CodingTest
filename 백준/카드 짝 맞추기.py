@@ -26,7 +26,6 @@ def move(b, y, x, dy, dx):
 
 
 def solution(board, r, c):
-    answer = 0
     b = ""
     for i in range(4):
         for j in range(4):
@@ -68,7 +67,3 @@ def solution(board, r, c):
                 if e != pos and b[e] == b[pos]:
                     b = remove_element(b, b[e])
                     deq.append((y, x, b, c + 1, -1))
-
-    return answer
-
-# 참고: https://walwal234.tistory.com/37
