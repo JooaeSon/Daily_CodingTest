@@ -10,10 +10,10 @@ def solution(play_time, adv_time, logs):
         total_time[start] += 1
         total_time[end] -= 1
 
-    #  total_time[i]: i 시각에 시청중인 사람의 수
+    #  total_time[i] = 시각 i부터 i+1까지 1초 간의 구간을 포함하는 재생 구간의 개수
     for i in range(1, len(total_time)):
         total_time[i] = total_time[i] + total_time[i - 1]
-
+    # 0부터 i초 까지의 누적 시청자 수
     for i in range(1, len(total_time)):
         total_time[i] = total_time[i] + total_time[i - 1]
 
