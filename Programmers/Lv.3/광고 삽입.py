@@ -20,7 +20,7 @@ def solution(play_time, adv_time, logs):
     most_view = 0
     max_time = 0
     '''
-    반복문을 돌며 시각 i - at + 1에 광고를 넣을 때의 누적 재생 시간을 구하여, 그중에서 가장 긴 시간을 max_time에 넣어주고 있습니다. max_time 값이 마지막으로 업데이트될 때의 시각 i - at + 1을 HH:MM:SS 형태로 변환한 값이 문제에서 요구하는 정답
+    반복문을 돌며 시각 i - adv_time + 1에 광고를 넣을 때의 누적 재생 시간을 구하여, 그중에서 가장 긴 시간을 max_time에 넣어주고 있습니다. max_time 값이 마지막으로 업데이트될 때의 시각 i - at + 1을 HH:MM:SS 형태로 변환한 값이 문제에서 요구하는 정답
     '''
     for i in range(adv_time - 1, play_time):
         if i >= adv_time:
