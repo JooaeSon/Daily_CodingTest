@@ -75,3 +75,5 @@ for _ in range(T):
                         nsum+=1
 
 print(nsum)
+
+# 참고: https://chldkato.tistory.com/132
