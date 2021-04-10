@@ -1,82 +1,77 @@
 import sys
 from collections import deque
 
+dx = [1, -1, 0, 0]
+dy = [0, 0, 1, -1]
+
+def bfs(x, y):
+    deq.append([x, y])
+    xcnt=0
+    while deq:
+        x, y =deq.popleft()
+        for i in range(4):
+            nx, ny = x+dx[i], y+dy[i]
+
+            if ny < 0:
+                ny = M-1
+            elif ny > M-1:
+                ny = 0
+
+            if 0<=nx<N and 0<=ny<M and not c[nx][ny]:
+                if Round[x][y]==Round[nx][ny]:
+                    c[nx][ny]=1
+                    deq.append([nx, ny])
+                    xcnt+=1
+    return xcnt
+
+
 N, M, T = map(int, input().split())
-roundPlate=[deque(map(int, input().split())) for _ in range(N)]
-rotate_info = [list(map(int, input().split())) for _ in range(T)]
 
-same=0
-def adjacent(RP):
-    global same, roundPlate, tmp
+Round, nsum, nm = [], 0, N*M
+for _ in range(N):
+    row = list(map(int, input().split()))
+    Round.append(row)
+    nsum+=sum(row)
 
-    tmp=RP
-    same = 0
-    # 가로 인접
-    for i in range(len(RP)):
+deq = deque()
+c = [[0]*M for _ in range(N)]
+
+for _ in range(T):
+    # x배수, d방향, k칸 회전
+    x, d, k = map(int, input().split())
+
+    k %= M
+    for i in range(x-1, N, x):
+        if d==0: # 시계
+            Round[i] = Round[i][-k:]+Round[i][:-k]
+            c[i] = c[i][-k:] + c[i][:-k]
+        else: # 반시계
+            Round[i] = Round[i][k:] + Round[i][:k]
+            c[i] = c[i][k:] + c[i][:k]
+
+    flag = 0
+    for i in range(N):
         for j in range(M):
-            if j==M-1:
-                j = -1
-            if RP[i][j]!=-1 and RP[i][j]==RP[i][j+1]: # 같은 수 체크
-                tmp[i][j]=-1
-                tmp[i][j+1]=-1
-                same+=1
-
-    # 세로 인접
-    for j in range(M):
-        for i in range(len(RP)-1):
-            if RP[i][j]!=-1 and RP[i][j]==RP[i+1][j]: # 같은 수 체크
-                tmp[i][j]=-1
-                tmp[i+1][j]=-1
-                same+=1
-    roundPlate=tmp
-
-    if same!=0: return True
-    else: return False
-
-
-def Sum(roundPlate):
-    ssum, n = 0, 0
-    rp = sum(roundPlate, deque())
-    for i in range(len(rp)):
-        if rp[i]!=-1:
-            n+=1
-            ssum+=rp[i]
-    return ssum, n
-
-
-# 원판 돌리기
-for info in rotate_info:
-    x, d, k = info[0], info[1], info[2]
-    cnt=1
-    num=x
-    while num<=len(roundPlate): # x 배수 회전
-        if d==0: # 시계 방향
-            roundPlate[num-1].rotate(k)
-        else: # 반시계 방향
-            roundPlate[num-1].rotate(-k)
-        cnt+=1
-        num = x * cnt
-    # 다 돌린 후 원판에 수가 남아있는지 확인하고 인접한 수 있는지 확인
-    chk=sum(roundPlate, deque())
-    if chk.count(-1)==len(chk): # 남아 있는 수가 없음
+            if not c[i][j]:
+                cnt=bfs(i, j)
+                if cnt:
+                    nsum -= Round[i][j]*cnt
+                    nm-=cnt
+                    flag=1
+    if nm==0:
         print(0)
-        sys.exit() # 종료
+        sys.exit()
 
-    # 인접한 수 확인
-    tmp = []
-    if not adjacent(roundPlate):
-        # 없으면 원판에 적힌 수 평균 구하고 평균보다 큰 수에서 1을 빼고, 작은 수에는 1을 더한다.
-        ssum, n = Sum(roundPlate)
-        avg=ssum/n
-        for i in range(len(roundPlate)):
-            for j in range(M):
-                if roundPlate[i][j]!=-1:
-                    if roundPlate[i][j]>avg:
-                        roundPlate[i][j]-=1
-                    elif roundPlate[i][j]< avg:
-                        roundPlate[i][j]+=1
+    if not flag: # 하나도 일치하는 수가 없었을 경우
+        avg = nsum/nm
+        for i in range(N):
+            for j in range(M): 
+                if not c[i][j]: # 아직 남아있는 숫자들 한에서
+                    if Round[i][j]>avg:
+                        Round[i][j] -= 1
+                        nsum -=1
+                    elif Round[i][j]< avg:
+                        Round[i][j] +=1
+                        nsum+=1
 
-# 다 돌린 후 원판의 최종 합 구하기
-result_sum, result_n =Sum(roundPlate)
-
-print(result_sum)
+print(nsum)
