@@ -4,9 +4,23 @@ def divide(x, y, d1, d2, answer):
     while True:
         while True:
             lx, ly, rx, ry = x+d1, y-d1, x+d2, y+d2
-            if rx == N-1 or ry ==N:
+            if rx == N-1 or ry == N:
                 break
+            bx, by = x+d1+d2, y-d1+d2
+            if bx >= N or by >= N or by < 0:
+                break
+            answer = min(answer, find_min(x, y, lx, ly, rx, ry, by))
+            d2+=1
+        d1 += 1
+        if x +d1 == N-1 or y-d1 ==-1:
+            break
+        d2 =1
+
     return answer
+
+def find_min(x, y, lx, ly, rx, ry, by):
+
+    return
 
 N = int(input())
 
