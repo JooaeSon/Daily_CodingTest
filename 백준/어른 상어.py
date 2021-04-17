@@ -83,7 +83,6 @@ while True:
         if impossible==len(one_shark_dir):
 
             nx, ny = x + dx[pre_dir], y + dy[pre_dir]
-            print('****', 'nx:', nx, 'ny:', ny)
             move_shark(x, y, nx, ny, num, pre_dir)
 
     time+=1
