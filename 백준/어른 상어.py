@@ -73,7 +73,7 @@ while True:
         for dir in one_shark_dir:
             dir-=1
             nx, ny = x+dx[dir], y+dy[dir]
-            print('nx:', nx, 'ny:', ny)
+
             if not 0<=nx<N or not 0<=ny<N or smell_stamp[nx][ny]:
                 impossible+=1 # 냄새 방향 불가능 카운팅
                 continue
