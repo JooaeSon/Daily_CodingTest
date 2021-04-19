@@ -56,7 +56,6 @@ def move_shark(x, y, nx, ny, num, dir):
 
 time=0
 while True:
-    print("board: ", board)
     if time > 1000:
         time=-1
         break
