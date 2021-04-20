@@ -66,7 +66,7 @@ while True:
     for num in range(M): # 상어 번호
         pre_dir=shark_dir[num]-1 # 상어의 현재 방향
         one_shark_dir=priority[num][pre_dir]
-        print(one_shark_dir)
+
         x, y, smell=shark[num][-1][0], shark[num][-1][1], shark[num][-1][2]
         impossible=0
         for dir in one_shark_dir:
