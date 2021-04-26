@@ -1,3 +1,7 @@
+import sys
+# 런타임 에러를 방지하기 위한 재귀호출 제한(1000번 이상으로 할 때)
+sys.setrecursionlimit(10**5)
+
 N, Q = map(int, input().split())
 A = [list(map(int, input().split())) for _ in range(2**N)]
 L = list(map(int, input().split()))
@@ -41,9 +45,6 @@ print(sum(map(sum, A))) #남아 있는 얼음의 합 구하기
 
 def dfs(x, y):
     global Sum
-
-    if not A[x][y]: # 0일 때, 얼음 존재 x
-        return
 
     A[x][y] = 0  # 이미 방문한 곳은 표시
     Sum+=1
