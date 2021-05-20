@@ -57,7 +57,6 @@ def move_fish(sx, sy):
                     sea[x][y][1]=(sea[x][y][1]+1)%8
                     rotate+=1
 
-
 ans=0
 d, cnt = sea[0][0][1], sea[0][0][0]+1
 pos[sea[0][0][0]], sea[0][0] = [], []
