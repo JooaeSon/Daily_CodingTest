@@ -1,3 +1,18 @@
+'''2차 풀이 '''
+
+def solution(n, arr1, arr2):
+    answer = []
+
+    for i, j in zip(arr1, arr2):
+        stream = (n - len(bin(i | j)[2:])) * '0' + str(bin(i | j)[2:])
+        stream = stream.replace('0', ' ')
+        stream = stream.replace('1', '#')
+        answer.append(stream)
+
+    return answer
+
+
+''' 1차 풀이
 def solution(n, arr1, arr2):
     answer = []
 
@@ -14,3 +29,4 @@ def solution(n, arr1, arr2):
         answer.append(stream)
 
     return answer
+'''
