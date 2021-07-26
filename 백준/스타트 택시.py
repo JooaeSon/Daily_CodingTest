@@ -8,11 +8,8 @@ taxi[0]-=1
 taxi[1]-=1
 
 # 고객 정보를 담기 위한
-customer_info=[[list() for _ in range(N)] for _ in range(N)]
-for _ in range(M):
-    cx, cy, px, py=map(int, input().split()) # 고객 지점 cx, cy / 목표 지점 px, py
-    customer_info[cx-1][cy-1]=[1, cx-1, cy-1, px-1, py-1] # 1은 출발지점
-    customer_info[px-1][py-1]=[2, cx-1, cy-1, px-1, py-1] # 2는 도착지점
+customer_info=[list(map(int, input().split())) for _ in range(M)]
+
 
 dx = [-1, 0, 0, 1]
 dy = [0, -1, 1, 0]
@@ -45,9 +42,6 @@ def findCumtomer(): # bfs를 사용하여 고객 찾기
 
     return dist, result
 
-def bringCustomer():
-
-    return
 
 for _ in range(M):
     dist, customer = findCumtomer()
