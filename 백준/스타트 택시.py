@@ -3,12 +3,17 @@ import copy
 
 N, M, F = map(int, input().split())
 board = [list(map(int, input().split())) for _ in range(N)]
+
 taxi = list(map(int, input().split()))
 taxi[0]-=1
 taxi[1]-=1
 
 # 고객 정보를 담기 위한
 customers=[list(map(int, input().split())) for _ in range(M)]
+for cust in customers:
+    board[cust[0]][cust[1]] = 2 # 손님의 춞발지점
+    board[cust[0]][cust[1]] = 3 # 손님의 도착지점
+
 
 dx = [-1, 0, 0, 1]
 dy = [0, -1, 1, 0]
@@ -49,8 +54,8 @@ def moveCustomer(customer):
 
     return
 
-for i in range(M):
-    findCustomer(customers[i])
-    moveCustomer(customers[i])
+for _ in range(M):
+    findCustomer(customers)
+    moveCustomer(customers)
 
 print(F)
