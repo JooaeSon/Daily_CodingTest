@@ -28,7 +28,7 @@ def findCustomer(customer): # bfs를 사용하여 고객 찾기
     # 가장 가까운 고객 지점 찾기
     while deq:
         x, y, dist= deq.popleft()
-        print(x, y)
+
         if cx==x and cy==y:
             F-=dist
             break
