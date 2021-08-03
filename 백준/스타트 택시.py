@@ -47,6 +47,7 @@ def findCustomer(customer): # bfs를 사용하여 고객 찾기
 
     return
 
+
 # 손님 데려다주기
 def moveCustomer(customer):
     global F
