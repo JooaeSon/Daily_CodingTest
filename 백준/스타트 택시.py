@@ -11,12 +11,13 @@ taxi[1]-=1
 # 고객 정보를 담기 위한
 customers=[list(map(int, input().split())) for _ in range(M)]
 for cust in customers:
-    board[cust[0]][cust[1]] = 2 # 손님의 춞발지점
-    board[cust[0]][cust[1]] = 3 # 손님의 도착지점
-
+    board[cust[0]-1][cust[1]-1] = 2 # 손님의 춞발지점
+    board[cust[2]-1][cust[3]-1] = 3 # 손님의 도착지점
+print(board)
 
 dx = [-1, 0, 0, 1]
 dy = [0, -1, 1, 0]
+
 
 # 손님 찾기
 def findCustomer(customer): # bfs를 사용하여 고객 찾기
@@ -28,19 +29,14 @@ def findCustomer(customer): # bfs를 사용하여 고객 찾기
     visited = copy.deepcopy(board)
     visited[x][y] = -1
 
-    cx, cy, px, py = customer[0], customer[1], customer[2], customer[3]
 
     # 가장 가까운 고객 지점 찾기
     while deq:
         x, y, dist= deq.popleft()
 
-        if cx==x and cy==y:
-            F-=dist
-            break
-
         for dir in range(4): # 상하좌우 탐색
             nx, ny = x+dx[dir], y+dy[dir]
-            if 0<=nx<N and 0<=ny<N and not board[nx][ny] and not visited[nx][ny]: # 가는 길이 빈칸인지 아직 방문하지 않은 곳인지 확인
+            if 0<=nx<N and 0<=ny<N and not board[nx][ny] and not visited[nx][ny] and board[nx][ny]==2: # 가는 길이 빈칸인지 아직 방문하지 않은 곳인지 확인
                 visited[nx][ny]=-1
                 deq.append((nx, ny, dist+1))
                 x, y = nx, ny
@@ -55,8 +51,9 @@ def moveCustomer(customer):
 
     return
 
-for _ in range(M):
-    findCustomer(customers)
-    moveCustomer(customers)
+
+#for _ in range(M):
+    #findCustomer(customers)
+    # moveCustomer(customers)
 
 print(F)
