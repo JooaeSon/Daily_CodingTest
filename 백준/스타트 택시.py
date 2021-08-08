@@ -14,8 +14,8 @@ for cust in customers:
     board[cust[0]-1][cust[1]-1] = 2 # 손님의 춞발지점
 print(board)
 
-dx = [-1, 0, 1, 0]
-dy = [0, -1, 0, 1]
+dx = [1, -1, 0, 0]
+dy = [0, 0, 1, -1]
 
 
 # 손님 찾기
@@ -80,7 +80,7 @@ def moveCustomer(taxi):
                 x, y = nx, ny
     print("*****", x, y)
     taxi[0], taxi[1] = x, y
-    print(taxi, "*********************************************")
+    print(taxi, "**************************")
     return dist, taxi
 
 
