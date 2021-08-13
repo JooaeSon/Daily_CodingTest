@@ -2,7 +2,7 @@ dx = [0, 1, 0, -1]
 dy = [1, 0, -1, 0]
 
 
-def rotate(query):
+def rotate(cube, query):
     x1, y1, x2, y2 = query
     sx, sy, ex, ey = x1 - 1, y1 - 1, x2 - 1, y2 - 1
 
@@ -12,6 +12,7 @@ def rotate(query):
             nx, ny = curr_x + dx[dir], curr_y + dy[dir]
             if not sx <= nx <= ex or not sy <= ny <= ey:
                 break
+            cube[nx][ny]=cube[curr_x][curr_y]
             curr_x, curr_y = nx, ny
 
     return
@@ -30,7 +31,7 @@ def solution(rows, columns, queries):
         cube.append(lst)
 
     for query in queries:
-        rotate(query)
+        rotate(cube, query)
         answer.append(min(map(min, queries)))
 
     return answer
