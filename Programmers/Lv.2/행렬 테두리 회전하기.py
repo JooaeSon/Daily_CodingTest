@@ -12,7 +12,9 @@ def rotate(cube, query):
             nx, ny = curr_x + dx[dir], curr_y + dy[dir]
             if not sx <= nx <= ex or not sy <= ny <= ey:
                 break
-            cube[nx][ny]=cube[curr_x][curr_y]
+
+            tmp = cube[nx][ny]
+            cube[nx][ny] = cube[curr_x][curr_y]
             curr_x, curr_y = nx, ny
 
     return
