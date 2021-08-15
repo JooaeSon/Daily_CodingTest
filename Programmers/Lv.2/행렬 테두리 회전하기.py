@@ -5,6 +5,7 @@ dy = [1, 0, -1, 0]
 def rotate(cube, query):
     x1, y1, x2, y2 = query
     sx, sy, ex, ey = x1 - 1, y1 - 1, x2 - 1, y2 - 1
+    moveNum = []
 
     curr_x, curr_y = sx, sy
     tmp = cube[curr_x][curr_y]
@@ -13,14 +14,13 @@ def rotate(cube, query):
             nx, ny = curr_x + dx[dir], curr_y + dy[dir]
             if not sx <= nx <= ex or not sy <= ny <= ey:
                 break
-
+            moveNum.append(cube[nx][ny])
             ntmp = cube[nx][ny]
             cube[nx][ny] = tmp
             tmp = ntmp
             curr_x, curr_y = nx, ny
-            print(cube)
 
-    return
+    return min(moveNum)
 
 
 def solution(rows, columns, queries):
@@ -36,9 +36,6 @@ def solution(rows, columns, queries):
         cube.append(lst)
 
     for query in queries:
-        rotate(cube, query)
-        answer.append(min(map(min, queries)))
+        answer.append(rotate(cube, query))
 
     return answer
-
-solution(6, 6, [[2,2,5,4],[3,3,6,6],[5,1,6,3]])
