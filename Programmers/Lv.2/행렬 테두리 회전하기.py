@@ -7,15 +7,18 @@ def rotate(cube, query):
     sx, sy, ex, ey = x1 - 1, y1 - 1, x2 - 1, y2 - 1
 
     curr_x, curr_y = sx, sy
+    tmp = cube[curr_x][curr_y]
     for dir in range(4):
         while True:
             nx, ny = curr_x + dx[dir], curr_y + dy[dir]
             if not sx <= nx <= ex or not sy <= ny <= ey:
                 break
 
-            tmp = cube[nx][ny]
-            cube[nx][ny] = cube[curr_x][curr_y]
+            ntmp = cube[nx][ny]
+            cube[nx][ny] = tmp
+            tmp = ntmp
             curr_x, curr_y = nx, ny
+            print(cube)
 
     return
 
@@ -37,3 +40,5 @@ def solution(rows, columns, queries):
         answer.append(min(map(min, queries)))
 
     return answer
+
+solution(6, 6, [[2,2,5,4],[3,3,6,6],[5,1,6,3]])
