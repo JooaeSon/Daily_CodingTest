@@ -13,9 +13,8 @@ print(dict)
 
 
 # 만족도 구하기
-'''
 for i in range(len(classRoom)):
     for j in range(len(classRoom)):
         classRoom[i][j]
-        '''
+
 print(ans)
