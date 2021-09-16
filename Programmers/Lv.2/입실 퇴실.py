@@ -1,12 +1,16 @@
-from collections import deque
+from collections import *
 
 
 def solution(enter, leave):
     answer = [0] * len(enter)
     room = []
+    dic = {}
 
     enter = deque(enter)
     leave = deque(leave)
+
+    for i in range(len(enter)):
+        dic[i + 1] = set()
 
     while leave:
         cnt = 0
@@ -14,17 +18,16 @@ def solution(enter, leave):
             room.append(enter.popleft())
             cnt += 1
 
-        print(room)
-        print("cnt:", cnt)
-
-        if cnt > 0:
-            for idx in room:
-                print("idx:", idx)
-                answer[idx - 1] += cnt
+        if cnt > 0:  # 사람이 새로 추가 될때만
+            for i in range(len(room)):
+                for j in range(len(room)):
+                    if i != j:
+                        dic[room[i]].add(room[j])
 
         room.remove(leave[0])
         leave.popleft()
 
-    return answer
+    for key, value in dic.items():
+        answer[key - 1] = len(value)
 
-solution([1, 4, 2, 3], [2, 1, 3, 4])
+    return answer
