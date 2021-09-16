@@ -26,3 +26,5 @@ def solution(enter, leave):
         leave.popleft()
 
     return answer
+
+solution([1, 4, 2, 3], [2, 1, 3, 4])
