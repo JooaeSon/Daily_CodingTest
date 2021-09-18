@@ -17,7 +17,9 @@ def solution(weights, head2head):
                 heaviear += 1
         win_heavier_count.append(heaviear)
 
-    print(win_heavier_count)
-    print(win_rate)
+    for i in range(N):
+        answer.append((win_rate[i], win_heavier_count[i], weights[i], i))
 
-    return answer
+    answer = sorted(answer, key=lambda x: (-x[0], -x[1], -x[2], x[3]))
+
+    return [answer[i][3] + 1 for i in range(N)]
