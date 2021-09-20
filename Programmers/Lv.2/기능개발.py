@@ -1,7 +1,7 @@
 from collections import deque
 import math
 
-
+# skd
 def solution(progresses, speeds):
     answer = []
     deq = deque()
