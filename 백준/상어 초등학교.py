@@ -21,15 +21,16 @@ for i in range(N):
         if classRoom[i][j]==0:
             for dir in range(4):
                 nx, ny=i+dx[dir], j+dy[dir]
-                if classRoom[nx][ny]==0:
+                if 0<=nx<N and 0<=ny<N and classRoom[nx][ny]==0:
                     cnt+=1
 
 
 
 
 # 만족도 구하기
+'''
 for i in range(N):
     for j in range(N):
         classRoom[i][j]
-
+'''
 print(ans)
