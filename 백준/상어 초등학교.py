@@ -38,18 +38,19 @@ for std, like_std in dict.items():
                             blank+=1
 
                 seat.append((like, blank, i, j))
-                seat=sorted(seat, key=lambda x: (-x[0], -x[1], x[2], x[3]))
-                classRoom[seat[0][2]][seat[0][3]]=std
+    # 좋아하는 사람 수(내림), 빈칸 수(내림), 행(오름), 렬(오름) 순서로 정렬한다.
+    seat=sorted(seat, key=lambda x: (-x[0], -x[1], x[2], x[3]))
+    classRoom[seat[0][2]][seat[0][3]]=std
     print(seat)
     print("classRoom: ", classRoom)
+    # 만족도 구하기
+    satisfaction=0
+    if seat[0][0]==0: satisfaction=0
+    elif seat[0][0]==1: satisfaction=1
+    elif seat[0][0]==2: satisfaction=10
+    elif seat[0][0] == 3: satisfaction = 100
+    else: satisfaction=1000
+    print("satisfaction: ", satisfaction)
+    ans+=satisfaction
 
-
-
-
-# 만족도 구하기
-'''
-for i in range(N):
-    for j in range(N):
-        classRoom[i][j]
-'''
 print(ans)
