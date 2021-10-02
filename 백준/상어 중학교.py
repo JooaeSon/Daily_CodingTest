@@ -10,7 +10,7 @@ dy = [0, 1, 0, -1]
 
 area=[]
 
-def isInGroup():
+def isInGroup(): # 격자에 그룹이 존재하는지 확인
 
     return True
 
@@ -32,6 +32,7 @@ def bfs(x, y):
 while True:
     if not isInGroup():
         break
+
     for i in range(N):
         for j in range(N):
             if not visited[i][j] and board[i][j]!=-1:
