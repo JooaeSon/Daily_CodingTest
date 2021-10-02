@@ -1,6 +1,8 @@
 from collections import deque
+
 N, M = map(int, input().split())
 board = [list(map(int, input().split())) for _ in range(N)]
+visited=[[0 for _ in range(N)] for _ in range(N)]
 ans = 0
 
 dx = [1, 0, -1, 0]
@@ -15,13 +17,14 @@ def bfs(x, y):
         x, y=deq.popleft()
         for dir in range(4):
             nx, ny = x+dx[dir], y+dy[dir]
-            if 0<=nx<N and 0<=ny<N:
+            if 0<=nx<N and 0<=ny<N and not visited[nx][ny]:
                 deq.append((nx, ny))
+                visited[nx][ny] = -1
                 cnt+=1
     return
 
 
-for i in range(N):
-    for j in range(N):
+for i in range(M):
+    for j in range(M):
         bfs(i, j)
 print(ans)
