@@ -8,6 +8,11 @@ ans = 0
 dx = [1, 0, -1, 0]
 dy = [0, 1, 0, -1]
 
+area=[]
+
+def isInGroup():
+
+    return True
 
 def bfs(x, y):
 
@@ -17,14 +22,19 @@ def bfs(x, y):
         x, y=deq.popleft()
         for dir in range(4):
             nx, ny = x+dx[dir], y+dy[dir]
-            if 0<=nx<N and 0<=ny<N and not visited[nx][ny]:
+            if 0<=nx<N and 0<=ny<N and not visited[nx][ny] and board[nx][ny]!=-1:
                 deq.append((nx, ny))
                 visited[nx][ny] = -1
                 cnt+=1
     return
 
 
-for i in range(M):
-    for j in range(M):
-        bfs(i, j)
+while True:
+    if not isInGroup():
+        break
+    for i in range(N):
+        for j in range(N):
+            if not visited[i][j] and board[i][j]!=-1:
+                bfs(i, j)
+
 print(ans)
