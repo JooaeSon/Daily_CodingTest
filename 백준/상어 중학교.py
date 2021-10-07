@@ -44,6 +44,23 @@ def bfs(x, y, area, dic):
     
     return dic, area
 
+def playGravity():
+
+    for j in range(N):
+        pivot=N-1
+        for i in reversed(range(N)):
+            if board[i][j]==-1:
+                pivot=i
+            elif board[i][j]!=-1 and board[i][j]!='':
+                board[pivot+1][j]=board[i][j]
+                board[i][j]=''
+                pivot=i
+
+
+
+
+    return
+
 
 while True:
     # 방문 블록 초기화
@@ -70,7 +87,10 @@ while True:
     ans+=len(rmove_block_lst)**2 # 블록수^2만큼 점수 획득
 
     # 3. 격자에 중력이 작용
+    playGravity()
+
     # 4. 격자가 90도 반시계 방향으로 회전
     # 5. 다시 격자에 중력이 작용
+    playGravity()
 
 print(ans)
