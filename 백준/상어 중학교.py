@@ -44,6 +44,7 @@ def bfs(x, y, area, dic):
     
     return dic, area
 
+
 def playGravity():
 
     for j in range(N):
@@ -55,9 +56,6 @@ def playGravity():
                 board[pivot+1][j]=board[i][j]
                 board[i][j]=''
                 pivot=i
-
-
-
 
 
     return
@@ -91,6 +89,8 @@ while True:
     playGravity()
 
     # 4. 격자가 90도 반시계 방향으로 회전
+    board=list(zip(*board))[::-1]
+
     # 5. 다시 격자에 중력이 작용
     playGravity()
 
