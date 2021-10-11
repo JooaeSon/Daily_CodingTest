@@ -27,9 +27,9 @@ def playGravity():
         for i in reversed(range(N)):
             if board[i][j]==-1:
                 pivot=i
-            elif board[i][j]!=-1 and board[i][j]!='':
+            elif board[i][j]!=-1 and board[i][j]!=None:
                 board[pivot+1][j]=board[i][j]
-                board[i][j]=''
+                board[i][j]=None
                 pivot=i
 
 
