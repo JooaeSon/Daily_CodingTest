@@ -41,7 +41,8 @@ def bfs(x, y, area, dic):
     px, py = x, y
     COLOR=board[px][py]
     deq = deque([(px, py)])
-    dic[(px, py)] = list()  # 기준 시작 좌표에 해당하는 경로 모두 담기 위해
+    dic[(px, py)] = [(px, py)]  # 기준 시작 좌표에 해당하는 경로 모두 담기 위해
+    visited[px][py] = -1 # 기준 점 방문 표시
     print("sx:", x, "sy:", y)
     cnt, rainbow =0, 0
     while deq:
@@ -90,13 +91,13 @@ print("area:", area)
 print("dic:", dic)
 rmove_block_lst=dic[(area[0][2], area[0][3])]
 
-"""
+
 # 2. 1에서 찾은 블록 그룹 모두 제거
 for x, y in rmove_block_lst:
-    board[x][y] = ''
+    board[x][y] = None
 
 ans+=len(rmove_block_lst)**2 # 블록수^2만큼 점수 획득
-"""
+print(board)
 """
     # 3. 격자에 중력이 작용
     playGravity()
