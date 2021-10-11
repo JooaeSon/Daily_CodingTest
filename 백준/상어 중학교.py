@@ -37,26 +37,32 @@ def playGravity():
 
 
 def bfs(x, y, area, dic):
-    # 기준 x, y
-    deq = deque([(x, y)])
-    print("x:", x, "y:", y)
+    # 기준 px, py
+    px, py = x, y
+    COLOR=board[px][py]
+    deq = deque([(px, py)])
+    dic[(px, py)] = list()  # 기준 시작 좌표에 해당하는 경로 모두 담기 위해
+    print("sx:", x, "sy:", y)
     cnt, rainbow =0, 0
     while deq:
         x, y=deq.popleft()
-        dic[(x, y)]=[(x, y)] # 기준 시작 좌표에 해당하는 경로 모두 담기 위해
+
         for dir in range(4):
             nx, ny = x+dx[dir], y+dy[dir]
             # 범위 안에 있고 아직 방문하지 않았어야 했고 검은블록(-1) 이 아니여야 한다.
             if 0<=nx<N and 0<=ny<N and not visited[nx][ny] and board[nx][ny]!=-1:
+                if not board[nx][ny]==0 and not board[nx][ny]==COLOR:
+                    continue
                 if board[nx][ny]==0: # 무지개 블록 갯수
                     rainbow+=1
                 deq.append((nx, ny))
-                dic[(x, y)].append((nx, ny)) # 지나간 좌표 표시/그룹에 속한 좌표 나중에 찾으려고
+                dic[(px, py)].append((nx, ny)) # 지나간 좌표 표시/그룹에 속한 좌표 나중에 찾으려고
                 visited[nx][ny] = -1
                 cnt+=1 # 전체 블록 갯수
 
     # 블록 수 > 무지개 블록 수 > 행 번호 > 열 번호
-    area.append((cnt, rainbow, x, y))
+    area.append((cnt, rainbow, px, py))
+    print("***area:", area)
     
     return dic, area
 
@@ -76,11 +82,12 @@ if not isInGroup():
 # 1. 크기가 가장큰 블록 그룹 찾기, area정렬 순서에 따라 가장 앞에 있는 요소 가져오기
 for i in range(N):
     for j in range(N):
-        if not visited[i][j] and board[i][j]!=-1:
+        if not visited[i][j] and board[i][j]!=-1 and board[i][j]!=0:
             dic, area=bfs(i, j, area, dic)
 
 area=sorted(area, key=lambda x:(-x[0], -x[1], -x[2], -x[3]))
 print("area:", area)
+print("dic:", dic)
 rmove_block_lst=dic[(area[0][2], area[0][3])]
 
 """
