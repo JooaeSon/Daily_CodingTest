@@ -20,10 +20,26 @@ def isInGroup(): # 격자에 그룹이 존재하는지 확인
     return True
 
 
+def playGravity():
+
+    for j in range(N):
+        pivot=N-1
+        for i in reversed(range(N)):
+            if board[i][j]==-1:
+                pivot=i
+            elif board[i][j]!=-1 and board[i][j]!='':
+                board[pivot+1][j]=board[i][j]
+                board[i][j]=''
+                pivot=i
+
+
+    return
+
+
 def bfs(x, y, area, dic):
     # 기준 x, y
     deq = deque([(x, y)])
-
+    print("x:", x, "y:", y)
     cnt, rainbow =0, 0
     while deq:
         x, y=deq.popleft()
@@ -45,46 +61,36 @@ def bfs(x, y, area, dic):
     return dic, area
 
 
-def playGravity():
-
-    for j in range(N):
-        pivot=N-1
-        for i in reversed(range(N)):
-            if board[i][j]==-1:
-                pivot=i
-            elif board[i][j]!=-1 and board[i][j]!='':
-                board[pivot+1][j]=board[i][j]
-                board[i][j]=''
-                pivot=i
-
-
-    return
-
-
-while True:
+# while True:
     # 방문 블록 초기화
-    visited = [[0 for _ in range(N)] for _ in range(N)]
-    dic = {}
-    area = []  # 블록 그룹 정보 초기화
+visited = [[0 for _ in range(N)] for _ in range(N)]
+dic = {}
+area = []  # 블록 그룹 정보 초기화
 
-    # 격자에 그룹이 존재하는지 확인하기
-    if not isInGroup():
-        break
-    
-    # 1. 크기가 가장큰 블록 그룹 찾기, area정렬 순서에 따라 가장 앞에 있는 요소 가져오기
-    for i in range(N):
-        for j in range(N):
-            if not visited[i][j] and board[i][j]!=-1 and board[i][j] != 0:
-                dic, area=bfs(i, j, area, dic)
-    area=sorted(area, key=lambda x:(-x[0], -x[1], -x[2], -x[3]))
-    rmove_block_lst=dic[(area[0][2], area[0][3])]
+# 격자에 그룹이 존재하는지 확인하기
+"""
+if not isInGroup():
+    break
+    """
 
-    # 2. 1에서 찾은 블록 그룹 모두 제거
-    for x, y in rmove_block_lst:
-        board[x][y] = ''
+# 1. 크기가 가장큰 블록 그룹 찾기, area정렬 순서에 따라 가장 앞에 있는 요소 가져오기
+for i in range(N):
+    for j in range(N):
+        if not visited[i][j] and board[i][j]!=-1:
+            dic, area=bfs(i, j, area, dic)
 
-    ans+=len(rmove_block_lst)**2 # 블록수^2만큼 점수 획득
+area=sorted(area, key=lambda x:(-x[0], -x[1], -x[2], -x[3]))
+print("area:", area)
+rmove_block_lst=dic[(area[0][2], area[0][3])]
 
+"""
+# 2. 1에서 찾은 블록 그룹 모두 제거
+for x, y in rmove_block_lst:
+    board[x][y] = ''
+
+ans+=len(rmove_block_lst)**2 # 블록수^2만큼 점수 획득
+"""
+"""
     # 3. 격자에 중력이 작용
     playGravity()
 
@@ -93,5 +99,6 @@ while True:
 
     # 5. 다시 격자에 중력이 작용
     playGravity()
+    """
 
 print(ans)
