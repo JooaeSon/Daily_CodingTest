@@ -23,14 +23,17 @@ def isInGroup(): # 격자에 그룹이 존재하는지 확인
 def playGravity():
 
     for j in range(N):
+        print("*******j:", j)
+        print("board:", board)
         pivot=N-1
         for i in reversed(range(N)):
+            print("i:", i)
             if board[i][j]==-1:
                 pivot=i
             elif board[i][j]!=-1 and board[i][j]!=None:
-                board[pivot+1][j]=board[i][j]
+                board[pivot-1][j]=board[i][j]
                 board[i][j]=None
-                pivot=i
+                pivot=pivot-1
 
 
     return
@@ -43,7 +46,7 @@ def bfs(x, y, area, dic):
     deq = deque([(px, py)])
     dic[(px, py)] = [(px, py)]  # 기준 시작 좌표에 해당하는 경로 모두 담기 위해
     visited[px][py] = -1 # 기준 점 방문 표시
-    print("sx:", x, "sy:", y)
+
     cnt, rainbow =0, 0
     while deq:
         x, y=deq.popleft()
@@ -63,7 +66,6 @@ def bfs(x, y, area, dic):
 
     # 블록 수 > 무지개 블록 수 > 행 번호 > 열 번호
     area.append((cnt, rainbow, px, py))
-    print("***area:", area)
     
     return dic, area
 
@@ -98,15 +100,15 @@ for x, y in rmove_block_lst:
 
 ans+=len(rmove_block_lst)**2 # 블록수^2만큼 점수 획득
 print(board)
-"""
-    # 3. 격자에 중력이 작용
-    playGravity()
 
-    # 4. 격자가 90도 반시계 방향으로 회전
-    board=list(zip(*board))[::-1]
+# 3. 격자에 중력이 작용
+playGravity()
 
-    # 5. 다시 격자에 중력이 작용
-    playGravity()
-    """
+# 4. 격자가 90도 반시계 방향으로 회전
+#board=list(zip(*board))[::-1]
+
+# 5. 다시 격자에 중력이 작용
+#playGravity()
+
 
 print(ans)
