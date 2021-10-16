@@ -33,3 +33,5 @@ def solution(n, wires):
         adj[wire[1]].append(wire[0])
 
     return min(result)
+
+# 참조: https://velog.io/@corone_hi/314.-%EC%A0%84%EB%A0%A5%EB%A7%9D%EC%9D%84-%EB%91%98%EB%A1%9C-%EB%82%98%EB%88%84%EA%B8%B0
