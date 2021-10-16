@@ -1,30 +1,35 @@
 from collections import defaultdict
-from collections import deque
 
 
-def bfs(wire, adj):
-    deq = deque()
+def dfs(start, visited):
+    global count
 
-    while deq:
-        n1 = deq.popleft()
-        for n2 in adj[n1]:
-            deq.append(n2)
+    visited.append(start)
+    count += 1
+
+    for vertax in adj[start]:
+        if vertax not in visited:
+            dfs(vertax, visited)
 
     return
 
 
 def solution(n, wires):
-    answer = -1
-
+    global count, adj
+    result = []
     adj = defaultdict(list)
 
     for wire in wires:
         adj[wire[0]].append(wire[1])
         adj[wire[1]].append(wire[0])
 
-    print(adj)
-
     for wire in wires:
-        bfs(wire, adj)
+        adj[wire[0]].remove(wire[1])
+        adj[wire[1]].remove(wire[0])
+        count = 0
+        dfs(1, [])
+        result.append(abs(n - 2 * count))  # 송전탑 개수의 차이의 최솟값 갱신
+        adj[wire[0]].append(wire[1])
+        adj[wire[1]].append(wire[0])
 
-    return answer
+    return min(result)
