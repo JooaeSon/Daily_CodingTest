@@ -1,22 +1,24 @@
-result = float('inf')
+result = float('-inf')
 
 
-def dfs(dungeon, k, count, N):
+def dfs(dungeons, k, count, visited):
     global result
 
-    if k < dungeon[0] or count > N:
-        return
-    count += 1
-    dfs(dungeon, k, count, N)
-    count -= 1
-    return
+    for idx, dungeon in enumerate(dungeons):
+        if not visited[idx] and k >= dungeons[idx][0]:
+            visited[idx] = 1
+            dfs(dungeons, k - dungeon[1], count + 1, visited)
+            visited[idx] = 0
+
+    result=max(count, result)
 
 
 def solution(k, dungeons):
     global result
-    N = len(dungeons)
 
-    for dungeon in dungeons:
-        dfs(dungeon, k, 0, N)
-
+    visited = [0 for _ in range(len(dungeons))]
+    dfs(dungeons, k, 0, visited)
+    print(result)
     return result
+
+solution(80, [[80,20],[50,40],[30,10]])
